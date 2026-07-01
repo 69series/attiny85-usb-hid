@@ -28,4 +28,6 @@ fuses:
 	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -U lfuse:w:0xE1:m -U hfuse:w:0xDD:m
 
 clean:
-	del $(TARGET).elf $(TARGET).hex
+# 	del $(TARGET).elf $(TARGET).hex
+# 	clean:
+	cmd /c del $(TARGET).elf $(TARGET).hex

@@ -1,8 +1,8 @@
 /* USB configuration for ATtiny85 V-USB HID */
 
 #define USB_CFG_IOPORTNAME      B
-#define USB_CFG_DMINUS_BIT      4
-#define USB_CFG_DPLUS_BIT       3
+#define USB_CFG_DMINUS_BIT      3
+#define USB_CFG_DPLUS_BIT       4
 
 #define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
 
@@ -19,15 +19,15 @@
 #define USB_CFG_INTERFACE_CLASS     3
 #define USB_CFG_INTERFACE_SUBCLASS  1
 #define USB_CFG_INTERFACE_PROTOCOL  1
-#define USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH 35
+#define USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH 45
 
 #define USB_CFG_VENDOR_ID       0xc0, 0x16
-#define USB_CFG_DEVICE_ID       0xdf, 0x05
+#define USB_CFG_DEVICE_ID       0xdb, 0x27
 #define USB_CFG_DEVICE_VERSION  0x00, 0x01
 #define USB_CFG_VENDOR_NAME     'N','a','r','e','n','d','r','a'
 #define USB_CFG_VENDOR_NAME_LEN 8
-#define USB_CFG_DEVICE_NAME     'H','I','D','K','e','y'
-#define USB_CFG_DEVICE_NAME_LEN 6
+#define USB_CFG_DEVICE_NAME     '6','9','s','H','I','D','K','e','y'
+#define USB_CFG_DEVICE_NAME_LEN 9
 #define USB_CFG_DEVICE_CLASS    0
 #define USB_CFG_IS_SELF_POWERED 0
 #define USB_CFG_IMPLEMENT_HALT  0
@@ -35,6 +35,9 @@
 #define USB_CFG_INTR_POLL_INTERVAL 10
 #define USB_CFG_HAVE_INTRIN_ENDPOINT 1
 #define USB_CFG_HAVE_INTRIN_ENDPOINT3 0
+
+#define USB_CFG_HAVE_MEASURE_FRAME_LENGTH   1
+
 #define USB_CFG_EP3_NUMBER      3
 #define USB_CFG_DESCR_PROPS_DEVICE 0
 #define USB_CFG_DESCR_PROPS_CONFIGURATION 0
@@ -45,3 +48,13 @@
 #define USB_CFG_DESCR_PROPS_HID 0
 #define USB_CFG_DESCR_PROPS_HID_REPORT 0
 #define USB_CFG_DESCR_PROPS_UNKNOWN 0
+
+/* ATtiny85 uses Pin Change Interrupt instead of INT0 */
+#define USB_INTR_CFG            PCMSK
+#define USB_INTR_CFG_SET        (1 << USB_CFG_DPLUS_BIT)
+#define USB_INTR_CFG_CLR        0
+#define USB_INTR_ENABLE         GIMSK
+#define USB_INTR_ENABLE_BIT     PCIE
+#define USB_INTR_PENDING        GIFR
+#define USB_INTR_PENDING_BIT    PCIF
+#define USB_INTR_VECTOR         PCINT0_vect
